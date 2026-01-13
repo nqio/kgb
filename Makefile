@@ -1,9 +1,9 @@
 SRCC = build/build.c
-ENDC = build/build
+ENDC = build/build.bin
 COMPC = gcc
 
 END = build/kgb.iso
-COMP = build/build
+COMP = ENDC
 SIZE = 5000
 
 all: $(END)

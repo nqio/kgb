@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
     if (strcmp(argv[i], "-s") == 0) {
       if (argc <= i) {
         cleanup("didn't find -s argument");
-        return EXIT_FAILURE;
+        return EXIT_FAILURE; 
       }
       
       i++;
