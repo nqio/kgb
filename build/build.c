@@ -29,7 +29,6 @@ int bash(char* command) {
 
 void cleanup(char* error_code) {
   printf("%s\n", error_code);
-  remove("kernel.asm.cat");
   remove("kernel.bin.cat");
   remove("boot.bin");
 }
