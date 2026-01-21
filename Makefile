@@ -1,11 +1,12 @@
 END = build/kgb.iso
 ASM_OUT = build/kgb.asm
+DIRECTORY = src/engine/* src/game/*
 SIZE = 5000
 
 all: $(END)
 
 $(END):
-	cat src/core/kernel.asm src/engine/* > $(ASM_OUT)
+	cat src/core/kernel.asm $(DIRECTORY) > $(ASM_OUT)
 	nasm -f bin src/core/boot.asm -o build/boot.bin
 	nasm -f bin $(ASM_OUT) -o build/kernel.bin
 	dd if=/dev/zero of=$(END) bs=512 count=$(SIZE)
