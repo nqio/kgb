@@ -1,3 +1,5 @@
+section .text
+
 rect:
 push eax ; 12
 push ebx ; 8

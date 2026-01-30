@@ -1,3 +1,5 @@
+section .text
+
 line:
 ; mov eax, 0 ; x1
 ; mov ebx, 0 ; y1
