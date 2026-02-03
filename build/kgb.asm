@@ -88,3 +88,91 @@ CODE_SEL equ 0x08
 DATA_SEL equ 0x10
 
 section .text
+
+section .text
+
+line:
+
+push ebp
+mov ebp, esp
+
+sub edx, ebx
+imul edx, 2
+
+mov edi, edx
+sub edx, ecx
+add edx, eax
+
+push eax
+mov dword [ebp-4], ecx
+sub dword [ebp-4], eax 
+push edi
+mov edi, 2
+imul dword [ebp-4], edi
+pop edi
+add esp, 4
+
+
+line_loop:
+cmp eax, ecx
+jg line_loop_exit
+
+; draw pixel here
+
+add edi, edx
+cmp edi, 0
+jl line_error_exit
+
+line_error:
+inc ebx
+sub edi, dword [ebp-4]
+
+line_error_exit:
+
+inc eax
+jmp line_loop
+
+line_loop_exit:
+
+mov ebp, [ebp] ; move the original ebp back into itself
+mov esp, ebp ; move original esp back into itself
+ret
+
+section .text
+
+rect:
+push eax ; 12
+push ebx ; 8
+push ecx ; 4
+push edx ; 0
+
+mov esi, [lfb_addr]  
+mov edx, [lfb_pitch]  
+
+mov eax, [esp + 8]
+mov ebx, [esp]
+sub ebx, eax
+imul eax, edx
+add esi, eax
+
+row_loop_rect:
+mov edi, esi
+mov eax, [esp + 12]
+mov ecx, [esp + 4]
+sub ecx, eax 
+imul eax, 3              
+add edi, eax         
+
+pixel_loop_rect:
+mov byte [edi], 0x00
+mov byte [edi+1], 0x00
+mov byte [edi+2], 0xFF 
+add edi, 3
+dec ecx
+jnz pixel_loop_rect
+
+add esi, edx        
+dec ebx
+jnz row_loop_rect
+ret
+
