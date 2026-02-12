@@ -99,6 +99,10 @@ parallel:
     mov byte [edi], 0x00
     mov byte [edi + 1], 0x00
     mov byte [edi + 2], 0xFF
+    add edi, 1600 * 3
+    mov byte [edi], 0x00
+    mov byte [edi + 1], 0x00
+    mov byte [edi + 2], 0xFF
 
     cli
     hlt
